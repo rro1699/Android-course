@@ -6,15 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:id="@+id/txt1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="input text"
+        app:layout_constraintLeft_toLeftOf="@+id/txt1"
+        app:layout_constraintTop_toBottomOf="@+id/txt1"
+        tools:ignore="Autofill,LabelFor" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txt1"
+        android:layout_marginTop="100dp"
+        android:text="Change color"
+        app:layout_constraintLeft_toLeftOf="@+id/txt1"
+        android:id="@+id/button1"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset color"
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/button1"
+        android:id="@+id/button2"
+        android:onClick="setBlackColor"/>
+
+    <RadioGroup  android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id = "@+id/rg"
+        >
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/rb1"
+           android:text="RadioButton1"
+           />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb2"
+            android:text="RadioButton2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text for radio buttons"
+            android:id="@+id/textRBs"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:layout_marginLeft="20dp"
+            android:onClick="checked"/>
+    </RadioGroup>
+
+ <!--   <LinearLayout android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max value"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:id="@+id/maximum"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step value"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/step"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:layout_marginLeft="20dp"
+            android:onClick="checked"/>
+    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
