@@ -3,4 +3,5 @@
     <string name="button1">Button</string>
     <string name="button2">Button</string>
     <string name="plus">+</string>
+    <string name="textClinks">0 Clicks</string>
 </resources>
