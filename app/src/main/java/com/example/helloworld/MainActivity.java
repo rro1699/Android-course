@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,30 +19,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = getApplicationContext();
-                int lengthLong;
-                String text;
-                if(state == 0 ){
-                    lengthLong = Toast.LENGTH_SHORT;
-                    text = "LENGTH_SHORT";
-                    state = 1;
-                }else{
-                    lengthLong = Toast.LENGTH_LONG;
-                    text = "LENGTH_LONG";
-                    state = 0;
-                }
-                Toast toast =
-                        Toast.makeText(context,text, lengthLong);
-                toast.show();
-            }
-        });
     }
 
+    public void onClickShort(View view){
+        Toast toast = Toast.makeText(this, "short time", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
-
+    public void onClickLong(View view){
+        Toast toast = Toast.makeText(this, "long time", Toast.LENGTH_LONG);
+        toast.show();
+    }
 
 }

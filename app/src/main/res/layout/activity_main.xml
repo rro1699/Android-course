@@ -15,7 +15,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:onClick="onClickShort"
         />
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:text="@string/buttonText2"
+        app:layout_constraintLeft_toLeftOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        android:onClick="onClickLong"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
