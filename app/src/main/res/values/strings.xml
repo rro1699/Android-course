@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HelloWorld</string>
+    <string name="secondActivity">secondActivity with obj</string>
+    <string name="secondActivity1">secondActivity without obj</string>
+    <string name="back">back</string>
+    <string name="result">with result</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
