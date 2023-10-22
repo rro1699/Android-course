@@ -1,6 +1,5 @@
 package com.example.helloworld;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
@@ -9,7 +8,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +16,7 @@ public class ThirdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_third);
         EditText text = findViewById(R.id.editText);
         text.setText("Input message");
+        super.soutBackStack(this.toString());
     }
 
     public void onClickOk(View view){
@@ -30,5 +30,11 @@ public class ThirdActivity extends AppCompatActivity {
     public void onClickCancel(View view){
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        super.soutBackStack(this.toString());
     }
 }

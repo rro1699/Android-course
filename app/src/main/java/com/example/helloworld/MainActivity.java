@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.helloworld.DTO.CustomObject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private final String TAG = "MainActivity";
 
     @Override
@@ -24,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
+        super.soutBackStack(this.getLocalClassName());
     }
     @Override
     protected void onDestroy(){
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Log.d(TAG, "onResume");
+        super.soutBackStack(this.toString());
     }
 
     @Override
