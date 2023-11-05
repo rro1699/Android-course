@@ -30,15 +30,19 @@ public class MainActivity extends AppCompatActivity {
         // when user tap on the button
         if (button != null) {
             button.setOnClickListener(it -> {
-                String url = "http://10.0.2.2:8090/and";
+                String url = "https://remoteservice.onrender.com/test/";
                 System.out.println("try to send request by url = "+url);
                 Request request = new Request.Builder()
                         .url(url)
                         .get()
                         .build();
-                try {
-                    Response execute = client.newCall(request).execute();
-                    System.out.println(execute.body() + "; code = " + execute.code());
+                try (Response execute = client.newCall(request).execute()){
+                    String body = execute.body() != null ? execute.body().string() : "";
+                    if(execute.code() == 200) {
+                        System.out.println("code = " + execute.code() + "  body = " + body);
+                    }else{
+                        System.out.println("code = " + execute.code());
+                    }
                 } catch (IOException e) {
                     System.out.println("Bad response. Some errors");
                     throw new RuntimeException(e);
