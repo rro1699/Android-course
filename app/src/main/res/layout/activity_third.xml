@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
+    tools:context=".ThirdActivity">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickWithObject"
-        android:text="@string/secondActivity"
+        android:onClick="onClickOk"
+        android:text="@string/ok"
         android:id="@+id/bt1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,19 +23,15 @@
         android:layout_marginTop="20dp"
         android:id="@+id/bt2"
         app:layout_constraintLeft_toLeftOf="@+id/bt1"
-        android:onClick="onClickWithoutObject"
-        android:text="@string/secondActivity1"
+        android:onClick="onClickCancel"
+        android:text="@string/cancel"
         />
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/bt2"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
+        android:id="@+id/editText"
         app:layout_constraintLeft_toLeftOf="@+id/bt2"
-        android:onClick="onClickWithResult"
-        android:text="@string/result"
-        android:id="@+id/bt3"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
