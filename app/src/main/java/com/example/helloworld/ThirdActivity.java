@@ -25,23 +25,28 @@ public class ThirdActivity extends AppCompatActivity {
         cv.put(DataBaseHelper.COLUMN_YEAR, 111);
 
         long id = db.insert(DataBaseHelper.TABLE, null, cv);
+        Log.d("ThirdActivity", "new id = "+id);
         if(id != -1){
-            printLog();
+            printLog(id);
             cv.put(DataBaseHelper.COLUMN_YEAR,222);
             db.update(DataBaseHelper.TABLE, cv, DataBaseHelper.COLUMN_ID + "=" + id, null);
-            printLog();
-            db.delete(DataBaseHelper.TABLE, "_id = ?", new String[]{String.valueOf(userId)});
-            printLog();
+            printLog(id);
+            db.delete(DataBaseHelper.TABLE, "_id = ?", new String[]{String.valueOf(id)});
+            printLog(id);
             userCursor.close();
         }
 
 
     }
-    private void printLog(){
+    private void printLog(Long id){
         userCursor = db.rawQuery("select * from " + DataBaseHelper.TABLE + " where " +
-                DataBaseHelper.COLUMN_ID + "=?", new String[]{String.valueOf(1)});
-        userCursor.moveToFirst();
-        Log.d("thirdActivity",userCursor.getString(1));
-        Log.d("thirdActivity",String.valueOf(userCursor.getInt(2)));
+                DataBaseHelper.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        int count = userCursor.getCount();
+        Log.d("thirdActivity", "found rows = "+count);
+        if(count>0) {
+            userCursor.moveToFirst();
+            Log.d("thirdActivity", userCursor.getString(1));
+            Log.d("thirdActivity", String.valueOf(userCursor.getInt(2)));
+        }
     }
 }
