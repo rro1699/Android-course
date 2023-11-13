@@ -3,6 +3,7 @@ package com.example.helloworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,10 +15,22 @@ import android.util.Log;
 import org.eazegraph.lib.models.ValueLinePoint;
 import org.eazegraph.lib.models.ValueLineSeries;*/
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-
+    private LineChart chart;
+    private ArrayList<Entry> entriesSecond;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,28 +42,57 @@ public class MainActivity extends AppCompatActivity {
         }
         manager.registerListener(listener,manager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE),SensorManager.SENSOR_DELAY_GAME);
 
-        /*ValueLineChart mCubicValueLineChart = (ValueLineChart) findViewById(R.id.cubiclinechart);
+        entriesSecond = new ArrayList<>();
+        entriesSecond.add(new Entry(0.5f, 0f));
+        entriesSecond.add(new Entry(2.5f, 2f));
+        entriesSecond.add(new Entry(3.5f, 1f));
+        entriesSecond.add(new Entry(3.6f, 2f));
+        entriesSecond.add(new Entry(4f, 0.5f));
+        entriesSecond.add(new Entry(5.1f, -0.5f));
 
-        ValueLineSeries series = new ValueLineSeries();
-        series.setColor(0xFF56B7F1);
+        // На основании массива точек создаем вторую линию с названием
+        LineDataSet datasetSecond = new LineDataSet(entriesSecond, "График второй");
+        // График будет зеленого цвета
+        datasetSecond.setColor(Color.GREEN);
+        // График будет плавным
+        datasetSecond.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
-        series.addPoint(new ValueLinePoint("Jan", 2.4f));
-        series.addPoint(new ValueLinePoint("Feb", 3.4f));
-        series.addPoint(new ValueLinePoint("Mar", .4f));
-        series.addPoint(new ValueLinePoint("Apr", 1.2f));
-        series.addPoint(new ValueLinePoint("Mai", 2.6f));
-        series.addPoint(new ValueLinePoint("Jun", 1.0f));
-        series.addPoint(new ValueLinePoint("Jul", 3.5f));
-        series.addPoint(new ValueLinePoint("Aug", 2.4f));
-        series.addPoint(new ValueLinePoint("Sep", 2.4f));
-        series.addPoint(new ValueLinePoint("Oct", 3.4f));
-        series.addPoint(new ValueLinePoint("Nov", .4f));
-        series.addPoint(new ValueLinePoint("Dec", 1.3f));
-        mCubicValueLineChart.addSeries(series);
-        mCubicValueLineChart.startAnimation();*/
+        LineData data = new LineData(datasetSecond);
+        // Передадим данные для графика в сам график
+        chart = findViewById(R.id.chart);
+        chart.setData(data);
+
+        // График будет анимироваться 0.5 секунды
+        chart.animateY(500);
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Timer timer = new Timer();
+        timer.schedule(timerTask,5*1000L, 10*1000L);
+    }
+
+    private final TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            Collections.reverse(entriesSecond);
+            LineDataSet datasetSecond = new LineDataSet(entriesSecond, "График второй");
+            // График будет зеленого цвета
+            datasetSecond.setColor(Color.GREEN);
+            // График будет плавным
+            datasetSecond.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+            LineData data = new LineData(datasetSecond);
+            // Передадим данные для графика в сам график
+            chart = findViewById(R.id.chart);
+            chart.setData(data);
+
+            // График будет анимироваться 0.5 секунды
+            chart.animateY(500);
+        }
+    };
     private final SensorEventListener listener = new SensorEventListener() {
         private final List<Integer> TYPES = List.of(Sensor.TYPE_AMBIENT_TEMPERATURE,
                 Sensor.TYPE_PROXIMITY,Sensor.TYPE_PRESSURE,Sensor.TYPE_LIGHT,Sensor.TYPE_RELATIVE_HUMIDITY);
