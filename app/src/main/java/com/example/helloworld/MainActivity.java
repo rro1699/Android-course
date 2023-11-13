@@ -9,22 +9,19 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
-/*import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.ValueLinePoint;
-import org.eazegraph.lib.models.ValueLineSeries;*/
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
         entriesSecond.add(new Entry(4f, 0.5f));
         entriesSecond.add(new Entry(5.1f, -0.5f));
 
-        // На основании массива точек создаем вторую линию с названием
+        // На основании массива точек создаем линию с названием
         LineDataSet datasetSecond = new LineDataSet(entriesSecond, "График второй");
-        // График будет зеленого цвета
         datasetSecond.setColor(Color.GREEN);
         // График будет плавным
         datasetSecond.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -75,22 +71,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private final TimerTask timerTask = new TimerTask() {
+        private final Random r = new Random();
         @Override
         public void run() {
-            Collections.reverse(entriesSecond);
+            entriesSecond.clear();
+
+            for(int i=0;i<10;i++){
+                entriesSecond.add(new Entry(i, r.nextFloat()));
+            }
             LineDataSet datasetSecond = new LineDataSet(entriesSecond, "График второй");
-            // График будет зеленого цвета
             datasetSecond.setColor(Color.GREEN);
-            // График будет плавным
             datasetSecond.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
             LineData data = new LineData(datasetSecond);
-            // Передадим данные для графика в сам график
-            chart = findViewById(R.id.chart);
             chart.setData(data);
-
-            // График будет анимироваться 0.5 секунды
-            chart.animateY(500);
+            new Handler(Looper.getMainLooper())
+                    .post(() -> chart.animateY(500));
         }
     };
     private final SensorEventListener listener = new SensorEventListener() {
